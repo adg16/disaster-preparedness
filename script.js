@@ -73,12 +73,17 @@ backToLogin.addEventListener('click', e => {
 
 // --- SIGNUP ---
 signupBtn.addEventListener('click', () => {
-    const username = document.getElementById('signup-username').value;
-    const password = document.getElementById('signup-password').value;
-    const password2 = document.getElementById('signup-password2').value;
+    const firstName = document.getElementById('first_name').value;
+    const middleName = document.getElementById('middle_name').value;
+    const lastName = document.getElementById('last_name').value;
+    const email = document.getElementById('email').value;
+    const username = document.getElementById('signup_username').value;
+    const password = document.getElementById('signup_password').value;
+    const password2 = document.getElementById('signup_password2').value;
 
-    if (!username || !password || !password2) {
-        alert('All fields are required');
+    // Basic validation
+    if (!firstName || !lastName || !email || !username || !password || !password2) {
+        alert('All required fields must be filled');
         return;
     }
 
@@ -87,23 +92,34 @@ signupBtn.addEventListener('click', () => {
         return;
     }
 
+    // Prepare data for POST
+    const formData = new URLSearchParams();
+    formData.append('first_name', firstName);
+    formData.append('middle_name', middleName);
+    formData.append('last_name', lastName);
+    formData.append('email', email);
+    formData.append('username', username);
+    formData.append('password', password);
+    formData.append('password2', password2);
+
     fetch('signup.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
+        body: formData.toString()
     })
-        .then(res => res.json())
-        .then(data => {
-            if (data.status === 'success') {
-                alert('Account created! Please login.');
-                signupContainer.classList.add('hidden');
-                loginContainer.classList.remove('hidden');
-            } else {
-                alert(data.message);
-            }
-        })
-        .catch(err => console.error(err));
+    .then(res => res.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert('Account created! Please login.');
+            signupContainer.classList.add('hidden');
+            loginContainer.classList.remove('hidden');
+        } else {
+            alert(data.message);
+        }
+    })
+    .catch(err => console.error(err));
 });
+
 
 // --- LOGOUT ---
 logoutBtn.addEventListener('click', () => {

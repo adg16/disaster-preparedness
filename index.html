@@ -25,9 +25,25 @@
     <!-- SIGNUP FORM -->
     <div id="signup-container" class="card hidden">
         <h3>Signup to Disaster Preparedness PH</h3>
-        <input type="text" id="signup-username" placeholder="Username">
-        <input type="password" id="signup-password" placeholder="Password">
-        <input type="password" id="signup-password2" placeholder="Confirm Password">
+        <!-- Username -->
+        <input type="text" id="signup_username" placeholder="Username" required>
+    
+        <!-- First Name -->
+        <input type="text" id="first_name" placeholder="First Name" required>
+    
+        <!-- Middle Name -->
+        <input type="text" id="middle_name" placeholder="Middle Name">
+    
+        <!-- Last Name -->
+        <input type="text" id="last_name" placeholder="Last Name" required>
+    
+        <!-- Email -->
+        <input type="email" id="email" placeholder="Email Address" required>
+    
+        <!-- Password -->
+        <input type="password" id="signup_password" placeholder="Password" required>
+        <input type="password" id="signup_password2" placeholder="Confirm Password" required>
+    
         <button id="signup-btn" class="btn-primary">Create Account</button>
         <p style="text-align:center; margin-top:10px;">
             Already have an account? <a href="#" id="back-to-login">Login</a>
